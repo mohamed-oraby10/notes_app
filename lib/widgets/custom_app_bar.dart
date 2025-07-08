@@ -9,18 +9,18 @@ class CustomAppBar extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          Text("Notes",style: TextStyle(
-            fontSize: 32
-          ),
-          ),
+          Text("Notes", style: TextStyle(fontSize: 32)),
           Spacer(),
           Container(
             decoration: BoxDecoration(
               color: Color(0xff3C3B3D),
-              borderRadius: BorderRadius.circular(12)
+              borderRadius: BorderRadius.circular(12),
             ),
-            child: IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-          )
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.search, size: 28),
+            ),
+          ),
         ],
       ),
     );

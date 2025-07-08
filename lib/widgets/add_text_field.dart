@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants.dart';
 
 class AddTextField extends StatelessWidget {
   const AddTextField({super.key, required this.hint, this.maxLines = 1});
@@ -13,7 +14,7 @@ class AddTextField extends StatelessWidget {
         maxLines: maxLines,
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: TextStyle(color: Colors.cyanAccent),
+          hintStyle: TextStyle(color: kMainColor),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
