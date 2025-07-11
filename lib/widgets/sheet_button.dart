@@ -7,19 +7,20 @@ class SheetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: () {},
       child: Container(
         height: 50,
         width: double.infinity,
-        decoration:BoxDecoration(
+        decoration: BoxDecoration(
           color: kMainColor,
           borderRadius: BorderRadius.circular(8),
-        ) ,
+        ),
         child: Center(
-          child: Text("Add",style: TextStyle(fontSize: 20,
-            color: Colors.black
-          ),),
-        )
+          child: Text(
+            "Add",
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          ),
+        ),
       ),
     );
   }
