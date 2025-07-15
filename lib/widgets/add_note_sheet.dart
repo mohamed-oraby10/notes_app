@@ -1,64 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/widgets/add_text_field.dart';
-import 'package:notes_app/widgets/sheet_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app/cubits/add_note_cubit/add_note_state.dart';
+import 'package:notes_app/widgets/add_note_form.dart';
 
-class AddNoteSheet extends StatelessWidget {
+class AddNoteSheet extends StatefulWidget {
   const AddNoteSheet({super.key});
 
+  @override
+  State<AddNoteSheet> createState() => _AddNoteSheetState();
+}
+
+class _AddNoteSheetState extends State<AddNoteSheet> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
-      child: SingleChildScrollView(child: AddNoteForm()),
-    );
-  }
-}
+      child: SingleChildScrollView(
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall: state is AddNoteLoading ? true : false,
+              child: AddNoteForm(),
+            );
+          },
+          listener: (context, state) {
+            if (state is AddNoteFailure) {
+              print("failed ${state.errMessage}");
+            }
 
-class AddNoteForm extends StatefulWidget {
-  const AddNoteForm({super.key});
-
-  @override
-  State<AddNoteForm> createState() => _AddNoteFormState();
-}
-
-class _AddNoteFormState extends State<AddNoteForm> {
-  final GlobalKey<FormState> formKey = GlobalKey();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? title, content;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autovalidateMode,
-      child: Column(
-        children: [
-          AddTextField(
-            hint: "Title",
-            onSaved: (value) {
-              title = value;
-            },
-          ),
-          AddTextField(
-            hint: "Content",
-            maxLines: 5,
-            onSaved: (value) {
-              content = value;
-            },
-          ),
-          SizedBox(height: 55),
-          SheetButton(
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {
-                  
-                });
-              }
-            },
-          ),
-        ],
+            if (state is AddNoteSuccess) {
+              Navigator.pop(context);
+            }
+          },
+        ),
       ),
     );
   }
