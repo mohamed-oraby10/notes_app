@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/widgets/add_text_field.dart';
 import 'package:notes_app/widgets/sheet_button.dart';
