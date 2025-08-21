@@ -16,21 +16,22 @@ class _AddNoteSheetState extends State<AddNoteSheet> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: SingleChildScrollView(
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: Container(
+        padding: EdgeInsets.all(16),
         child: BlocConsumer<AddNoteCubit, AddNoteState>(
           builder: (context, state) {
             return ModalProgressHUD(
               inAsyncCall: state is AddNoteLoading ? true : false,
-              child: AddNoteForm(),
+              child: SingleChildScrollView(child: AddNoteForm()),
             );
           },
           listener: (context, state) {
             if (state is AddNoteFailure) {
               print("failed ${state.errMessage}");
             }
-
+        
             if (state is AddNoteSuccess) {
               Navigator.pop(context);
             }
