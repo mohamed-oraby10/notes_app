@@ -15,13 +15,13 @@ class NotesLoading extends NotesState {}
 class NotesSuccess extends NotesState {
   final List<NoteModel> notes;
 
-  NotesSuccess({required this.notes});
+  NotesSuccess( this.notes);
 
 }
 
 class NotesFailure extends NotesState {
  final String errMessage;
 
-  NotesFailure({required this.errMessage});
+  NotesFailure( this.errMessage);
   
 }
