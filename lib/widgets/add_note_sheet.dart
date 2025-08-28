@@ -23,14 +23,19 @@ class _AddNoteSheetState extends State<AddNoteSheet> {
           builder: (context, state) {
             return AbsorbPointer(
               absorbing: state is AddNoteLoading ? true : false,
-              child: SingleChildScrollView(child: AddNoteForm()),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: SingleChildScrollView(child: AddNoteForm()),
+              ),
             );
           },
           listener: (context, state) {
             if (state is AddNoteFailure) {
               print("failed ${state.errMessage}");
             }
-        
+
             if (state is AddNoteSuccess) {
               Navigator.pop(context);
             }
