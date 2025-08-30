@@ -29,8 +29,9 @@ class _EditNoteBodyState extends State<EditNoteBody> {
               widget.note.title = title ?? widget.note.title;
               widget.note.subTitle = content ?? widget.note.subTitle;
               widget.note.save();
-              Navigator.pop(context);
               BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+              Navigator.pop(context);
+              
             },
           ),
           SizedBox(height: 20),
